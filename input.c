@@ -96,12 +96,17 @@ void entry_input(){
         
         read(dev, &push_sw_buff, buff_size);
         
-        in_pac.type = ev[0].type;
-        in_pac.value = ev[0].value;
-        in_pac.code = ev[0].code;
-        strcpy(in_pac.push_sw_buff, push_sw_buff);
+        shmaddr->type = ev[0].type;
+        shmaddr->value = ev[0].value;
+        shmaddr->code = ev[0].code;
+        strcpy(shmaddr->push_sw_buff, push_sw_buff);
+
+//        in_pac.type = ev[0].type;
+//        in_pac.value = ev[0].value;
+//        in_pac.code = ev[0].code;
+//        strcpy(in_pac.push_sw_buff, push_sw_buff);
         
-        strcpy(shmaddr, &in_pac);
+        //strcpy(shmaddr, &in_pac);
         printf("from input to main : ");
         printf("type %d value %d code %d\n", in_pac.type,in_pac.value,in_pac.code);
         for(i = 0; i < 9; i++){

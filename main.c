@@ -168,17 +168,15 @@ int main() {
         
         struct in_packet in_pac;
         
-        strcpy(&in_pac,shmaddr);
-        
-        ev[0].type = in_pac.type;
-        ev[0].value = in_pac.value;
-        ev[0].code = in_pac.code;
-        strcpy(push_sw_buff, in_pac.push_sw_buff);
+        ev[0].type = shmaddr->type;
+        ev[0].value = shmaddr->value;
+        ev[0].code = shmaddr->code;
+        strcpy(push_sw_buff, shmaddr->push_sw_buff);
         
         printf("main receive : ");
-        printf("type %d value %d code %d\n", in_pac.type,in_pac.value,in_pac.code);
+        printf("type %d value %d code %d\n", shmaddr->type,shmaddr->value,shmaddr->code);
         for(i = 0; i < 9; i++){
-            printf("%d ",in_pac.push_sw_buff[i]);
+            printf("%d ", push_sw_buff[i]);
         }
         usleep(2000000);
         
