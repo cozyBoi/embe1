@@ -95,7 +95,7 @@ void entry_input(){
         }
         
         read(dev, &push_sw_buff, buff_size);
-        printf("push : ")
+        printf("push : ");
         for(i = 0; i < 9; i++){
             printf("%d ", push_sw_buff[i]);
         }
