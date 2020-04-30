@@ -50,9 +50,6 @@ void user_signal1(int sig)
 	quit = 1;
 }
 
-char FND[4], LED[8], TextLED[2][100], Draw_Matrix[10][7];
-int dot = 0, Count_jinsu = 10, Count_total = 0, Text_len = 1, Text_mode = TEXT_ALPHA_MODE, i, firstExec = 1;
-int y, x, curser = 0;
 
 
 void clock_plus_hour() {
@@ -76,129 +73,6 @@ void clock_plus_minute() {
 		FND[2] = 0;
 		clock_plus_hour();
 	}
-}
-
-void out_to_FND(char data[4]) {
-	int dev;
-	int i;
-	int str_size;
-    unsigned char D[4];
-	for (i = 0;i<4;i++)
-	{
-		if ((data[i]>=0x30) && (data[i]<=0x39)) {
-			D[i] = data[i] - 0x30;
-		}
-        else{
-            D[i] = data[i];
-        }
-	}
-
-	dev = open(FND_DEVICE, O_RDWR);
-	if (dev<0) {
-		printf("Device open error : %s\n", FND_DEVICE);
-		exit(1);
-	}
-
-	write(dev, &D, 4);
-
-	close(dev);
-}
-
-void out_to_LED(char data_arr[8]) {
-	int dev;
-
-	dev = open(LED_DEVICE, O_RDWR);
-	if (dev<0) {
-		printf("Device open error : %s\n", LED_DEVICE);
-		exit(1);
-	}
-
-	int data = 0;
-
-	for (i = 0; i < 8; i++) {
-		data += (1 << (7 - i)) * data_arr[i];
-	}
-
-	write(dev, &data, 1);
-
-	close(dev);
-}
-
-void out_to_LCD(char str[100], int len) {
-	int dev;
-
-	dev = open(FPGA_TEXT_LCD_DEVICE, O_WRONLY);
-	if (dev<0) {
-		printf("Device open error : %s\n", FPGA_TEXT_LCD_DEVICE);
-		exit(1);
-	}
-	if (len <= 8) {
-		write(dev, str, 8);
-	}
-	else {
-		write(dev, &str[len-8], 8);
-	}
-
-	close(dev);
-}
-
-void out_to_Matrix_alpha(int mode) {
-	int dev;
-	int set_num;
-
-	dev = open(FPGA_DOT_DEVICE, O_WRONLY);
-	if (dev<0) {
-		printf("Device open error : %s\n", FPGA_DOT_DEVICE);
-		exit(1);
-	}
-	set_num = 1;
-	if (mode == TEXT_ALPHA_MODE) {
-		set_num = 10;
-	}
-	write(dev, fpga_number[set_num], 10);
-
-	close(dev);
-}
-
-unsigned char arr_to_int(char arr[7]) {
-	unsigned char ret = 0;
-	for (i = 0; i < 7; i++) {
-		if(arr[i] == 1) ret += (1 << (6 - i));
-	}
-	return ret;
-}
-
-void out_to_Matrix(char matrix[10][7]) {
-	int dev;
-	int set_num;
-    
-	dev = open(FPGA_DOT_DEVICE, O_WRONLY);
-//    printf("where 6\n");
-	if (dev < 0) {
-		printf("Device open error : %s\n", FPGA_DOT_DEVICE);
-		exit(1);
-	}
-    
-	unsigned char fpga_data[10];
-//    printf("where 7\n");
-    int i, j;
-    /*
-    for(i = 0; i < 10; i++){
-        for(j = 0; j < 7; j++){
-            printf("%d ");
-        }
-        printf("\n");
-    }*/
-    
-	for (i = 0; i < 10; i++) {
-		fpga_data[i] = arr_to_int(matrix[i]);
-        //printf("%d ", fpga_data[i]);
-	}
-    printf("\n");
-    //
-	write(dev, fpga_data, 10);
-
-	close(dev);
 }
 
 void Clock_FND_set_to_borad_time(){
@@ -254,6 +128,12 @@ void reset_para() {
 }
 
 int main() {
+    dot = 0;
+    Count_jinsu = 10;
+    Count_total = 0;
+    Text_len = 1;
+    Text_mode = TEXT_ALPHA_MODE;firstExec = 1;
+    curser = 0;
 	int mode = 0;
 	struct input_event ev[BUFF_SIZE];
 	int fd, rd, value, size = sizeof(struct input_event);
