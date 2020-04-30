@@ -173,6 +173,13 @@ int main() {
         ev[0].code = in_pac.code;
         strcpy(push_sw_buff, in_pac.push_sw_buff);
         
+        printf("main receive : ");
+        printf("type %d value %d code %d\n", in_pac.type,in_pac.value,in_pac.code);
+        for(i = 0; i < 9; i++){
+            printf("%d ",in_pac.push_sw_buff[i]);
+        }
+        usleep(2000000);
+        
         if (ev[0].type == 1 && ev[0].value == KEY_RELEASE && ev[0].code == 115) {
             mode = (mode + 1) % 4;
             reset_para();

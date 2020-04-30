@@ -71,6 +71,7 @@ void entry_input(){
     
     int semid;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
+    int i;
     while (1) {
         vv(semid);
         printf("input hi\n");
@@ -104,7 +105,12 @@ void entry_input(){
         strcpy(in_pac.push_sw_buff, push_sw_buff);
         
         strcpy(shmaddr, &in_pac);
-        
+        printf("from input to main : ");
+        printf("type %d value %d code %d\n", in_pac.type,in_pac.value,in_pac.code);
+        for(i = 0; i < 9; i++){
+            printf("%d ",in_pac.push_sw_buff[i]);
+        }
+        usleep(2000000);
         pp(semid);
         usleep(250000);
     }
