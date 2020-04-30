@@ -557,18 +557,17 @@ int main() {
         }
         
         
-        struct packet pak;
         int i, j;
-        for(i = 0; i < 4; i++) pak.FND[i] = FND[i];
-        for(i = 0; i < 8; i++) pak.LED[i] = LED[i];
+        for(i = 0; i < 4; i++) shmaddr_2->FND[i] = FND[i];
+        for(i = 0; i < 8; i++) shmaddr_2->LED[i] = LED[i];
         for(i = 0; i < 2; i++){
             for(j = 0; j < 100; j++){
-                pak.TextLED[i][j] = TextLED[i][j];
+                shmaddr_2->TextLED[i][j] = TextLED[i][j];
             }
         }
         for(i = 0; i < 10; i++){
             for(j = 0; j < 7; j++){
-                pak.Draw_Matrix[i][j] = Draw_Matrix[i][j];
+                shmaddr_2->Draw_Matrix[i][j] = Draw_Matrix[i][j];
             }
         }
         shmaddr_2->mode =mode;
