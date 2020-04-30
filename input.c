@@ -100,6 +100,8 @@ void entry_input(){
         shmaddr->code = ev[0].code;
         strcpy(shmaddr->push_sw_buff, push_sw_buff);
         ev[0].type = 0;
+        ev[0].value = 0;
+        ev[0].code = 0;
 //        in_pac.type = ev[0].type;
 //        in_pac.value = ev[0].value;
 //        in_pac.code = ev[0].code;
