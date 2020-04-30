@@ -61,7 +61,7 @@ void entry_input(){
     }
     
     memset(&in_pac, 0, sizeof(struct in_packet));
-    dev = open("/dev/fpga_push_switch", O_RDWR);
+    dev = open("/dev/fpga_push_switch", O_RDWR | O_NONBLOCK);
     printf("dev : %d\n", dev);
     if (dev<0) {
         printf("Device Open Error\n");
