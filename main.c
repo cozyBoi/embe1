@@ -101,8 +101,8 @@ int main() {
     
     int pid = (int)fork();
     if(pid != 0){
-        fork();
-        if(pid != 0){
+        int ppid = fork();
+        if(ppid != 0){
             entry_output();
         }
         else {
