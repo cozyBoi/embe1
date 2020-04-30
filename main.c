@@ -164,16 +164,7 @@ int main() {
 	(void)signal(SIGINT, user_signal1);
 	buff_size = sizeof(push_sw_buff);
 	//dev open
-	int pid = (int)fork();
-    if(pid != 0){
-        int ppid = fork();
-        if(ppid != 0){
-            entry_output();
-        }
-        else {
-            entry_input();
-        }
-    }
+	
     int semid, semid0;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
