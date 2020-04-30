@@ -15,6 +15,7 @@
 #include <termios.h>
 #include <signal.h>
 #include <sys/ioctl.h>
+#include <sys/shm.h>
 #include <time.h>
 
 #define BUFF_SIZE 64
