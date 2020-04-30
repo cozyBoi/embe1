@@ -24,6 +24,7 @@
 
 int pp (int semid) {
     // p 연산
+    printf("sema down\n");
     struct sembuf p_buf;
 
     p_buf.sem_num = 0;
@@ -34,6 +35,7 @@ int pp (int semid) {
     return (0);
 }
 int vv(int semid) {
+    printf("sema up\n");
     // v 연산
     struct sembuf v_buf;
 

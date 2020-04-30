@@ -22,6 +22,7 @@
 #include <sys/ipc.h>
 
 int p (int semid) {
+    printf("sema up\n");
     // p 연산
     struct sembuf p_buf;
 
@@ -33,6 +34,7 @@ int p (int semid) {
     return (0);
 }
 int v(int semid) {
+    printf("sema down\n");
     // v 연산
     struct sembuf v_buf;
 
