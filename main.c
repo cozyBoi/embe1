@@ -172,13 +172,14 @@ int main() {
         ev[0].value = shmaddr->value;
         ev[0].code = shmaddr->code;
         strcpy(push_sw_buff, shmaddr->push_sw_buff);
-        memset(shmaddr, 0, sizeof(struct packet));
+        
         
         printf("main receive : ");
         printf("type %d value %d code %d\n", shmaddr->type,shmaddr->value,shmaddr->code);
         for(i = 0; i < 9; i++){
             printf("%d ", push_sw_buff[i]);
         }
+        memset(shmaddr, 0, sizeof(struct packet));
         memset(shmaddr_2, 0, sizeof(struct packet));
         usleep(2000000);
         
