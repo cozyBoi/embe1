@@ -8,7 +8,7 @@ CFLAGS= #-W
 TARGET = 20171677_hw1
 OBJDIR = build/
 
-_OBJS = input.o output.o main.o device_all.o mode_all.o
+_OBJS = input.o output.o main.o
 OBJS = $(addprefix $(OBJDIR),$(_OBJS))
 
 $(OBJDIR)$(TARGET): $(OBJS)
