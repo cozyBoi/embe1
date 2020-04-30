@@ -58,7 +58,6 @@ void entry_input(){
     if ((fd = open(device, O_RDONLY | O_NONBLOCK)) == -1) {
         printf("%s is not a vaild device.n", device);
     }
-
     
     memset(&in_pac, 0, sizeof(struct in_packet));
     dev = open("/dev/fpga_push_switch", O_RDWR);
@@ -74,12 +73,12 @@ void entry_input(){
     
     while (1) {
         pp(semid);
-        printf("input start\n");
+        //printf("input start\n");
         rd = read(fd, ev, size * BUFF_SIZE);
-        printf("input read\n");
+        //printf("input read\n");
         while (ev[0].type == 1 && ev[0].value == KEY_PRESS && ev[0].code == 115) {
             //volume +, mode change
-            printf("push\n");
+            //printf("push\n");
             rd = read(fd, ev, size * BUFF_SIZE);
             if(ev[0].value != KEY_PRESS){
                 printf("pop\n");
