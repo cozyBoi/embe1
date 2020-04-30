@@ -95,6 +95,7 @@ void reset_para() {
 }
 
 int main() {
+    printf("init1\n");
     struct input_event ev[BUFF_SIZE];
     unsigned char push_sw_buff[MAX_BUTTON];
     
@@ -115,10 +116,9 @@ int main() {
     led_mode = 0;
     mode = 0;
     curser = 0;
+    printf("init2\n");
     while(1){
         //forK?
-
-        
         struct input_event*shmaddr_ev;
         unsigned char *shmaddr_sw;
         
