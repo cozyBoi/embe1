@@ -553,7 +553,7 @@ int main() {
             FND[3] = (Count_total)-(Count_total / 10) * 10;
         }
         
-        
+        printf("send main to out\n");
         int i, j;
         for(i = 0; i < 4; i++) {
             shmaddr_2->FND[i] = FND[i];
@@ -582,8 +582,8 @@ int main() {
         shmaddr_2->curser = curser;
         shmaddr_2->y = y;
         shmaddr_2->x = x;
-        printf("send main to out\n");
-        printf("%d %d %d %d %d %d %d", shmaddr_2->mode,
+        
+        printf("%d %d %d %d %d %d %d\n", shmaddr_2->mode,
                shmaddr_2->led_mode,
                shmaddr_2->Text_len,
                shmaddr_2->Text_mode,
