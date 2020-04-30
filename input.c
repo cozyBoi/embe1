@@ -27,7 +27,6 @@ void entry_input(){
     unsigned char push_sw_buff[MAX_BUTTON];
 
     dev = open("/dev/fpga_push_switch", O_RDWR);
-    printf("dev : %d\n", dev);
     if (dev<0) {
         printf("Device Open Error\n");
         close(dev);
@@ -37,10 +36,16 @@ void entry_input(){
     while (1) {
         rd = read(fd, ev, size * BUFF_SIZE);
         
+        
         while (ev[0].type == 1 && ev[0].value == KEY_PRESS && ev[0].code == 115) {
             //volume +, mode change
+            printf("push\n");
             rd = read(fd, ev, size * BUFF_SIZE);
+            if(ev[0].value != KEY_PRESS){
+                printf("pop\n");
+            }
         }
+        
         
         while (ev[0].type == 1 && ev[0].value == KEY_PRESS && ev[0].code == 114) {
             //volume -, mode change
