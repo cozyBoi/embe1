@@ -15,9 +15,10 @@
 
 unsigned char quit = 0;
 
+
 char FND[4], LED[8], TextLED[2][100], Draw_Matrix[10][7];
-int dot = 0, Count_jinsu = 10, Count_total = 0, Text_len = 1, Text_mode = TEXT_ALPHA_MODE, i, firstExec = 1;
-int y, x, curser = 0;
+int dot = 0, Count_jinsu = 10, Count_total = 0, Text_len = 1, Text_mode = TEXT_ALPHA_MODE, i, firstExec = 1, led_mode = 0, mode = 0;
+int y, x, curser = 0, firstExec;
 
 
 unsigned char fpga_number[11][10] = {

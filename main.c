@@ -18,11 +18,6 @@
 #include <time.h>
 #include <sys/shm.h>
 
-char FND[4], LED[8], TextLED[2][100], Draw_Matrix[10][7];
-int dot = 0, Count_jinsu = 10, Count_total = 0, Text_len = 1, Text_mode = TEXT_ALPHA_MODE, i, firstExec = 1;
-int y, x, curser = 0;
-
-
 
 void clock_plus_hour() {
     FND[1]++;
@@ -88,7 +83,7 @@ void reset_para() {
     }
     out_to_Matrix(Draw_Matrix);
     out_to_FND(FND);
-    out_to_LCD(TextLED[0]);
+    out_to_LCD(TextLED[0], 0);
     out_to_LED(LED);
     Count_total = dot = 0;
     Count_jinsu = 10;
@@ -97,6 +92,7 @@ void reset_para() {
     y = x = 0;
     curser = 0;
     firstExec = 1;
+    led_mode = 0;
 }
 
 int main() {
@@ -125,8 +121,8 @@ int main() {
         int shmid_ev = shmget(key0, 1024, IPC_CREAT|0644);
         int shmid_sw = shmget(key1, 1024, IPC_CREAT|0644);
         
-        shmaddr_ev = (struct input_event* *)shmat(shmid_ev, NULL, 0);
-        strcpy(ev, shmaddr_ev);
+        shmaddr_ev = (struct input_event**)shmat(shmid_ev, NULL, 0);
+        strcpy(&ev, shmaddr_ev);
         
         shmaddr_sw = (unsigned char *)shmat(shmid_sw, NULL, 0);
         strcpy(push_sw_buff, shmaddr_sw);
@@ -528,9 +524,9 @@ int main() {
         pak.x = x;
         
         key_t key2 = ftok("./", 3);
-        int shmid_2 = shmget(key2, sizeof(struct pak), IPC_CREAT|0644);
-        shmaddr_2 = (struct pak*)shmat(shmid_2, NULL, 0);
-        strcpy(shmaddr_2, pak);
+        int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
+        struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
+        strcpy(shmaddr_2, &pak);
     }
     return 0;
 }
