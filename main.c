@@ -127,9 +127,9 @@ int main() {
         
         key_t key0 = ftok("./", 1);
         
-        int shmid = shmget(key0, sizeof(in_packet), IPC_CREAT|0644);
-        struct in_packet*shmaddr = (struct in_packet)shmat(shmid, NULL, 0);
-        strcpy(in_pac,shmaddr);
+        int shmid = shmget(key0, sizeof(struct in_packet), IPC_CREAT|0644);
+        struct in_packet*shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
+        strcpy(&in_pac,shmaddr);
         
         ev[0].type = in_pac.type;
         ev[0].value = in_pac.value;
