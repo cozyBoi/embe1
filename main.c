@@ -175,12 +175,14 @@ int main() {
         memset(shmaddr_2, 0, sizeof(struct packet));
         
         if (ev[0].type == 1 && ev[0].value == KEY_RELEASE && ev[0].code == 115) {
+            ev[0].type = 0;
             mode = (mode + 1) % 4;
             reset_para();
             printf("mode : %d\n", mode);
         }
         
         if (ev[0].type == 1 && ev[0].value == KEY_RELEASE && ev[0].code == 114) {
+            ev[0].type = 0;
             mode = mode ? mode - 1 : 3;
             reset_para();
             printf("mode : %d\n", mode);
