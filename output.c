@@ -154,6 +154,7 @@ void out_to_Matrix(char matrix[10][7]) {
 }
 
 void entry_output(){
+    printf("init output\n");
     int k = 0;
     while(1){
         key_t key2 = ftok("./", 3);

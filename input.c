@@ -19,6 +19,7 @@
 #include <sys/shm.h>
 
 void entry_input(){
+    printf("init input\n");
     struct input_event ev[BUFF_SIZE];
     int fd, rd, value, size = sizeof(struct input_event);
     char* device = "/dev/input/event0";
@@ -26,6 +27,7 @@ void entry_input(){
     unsigned char push_sw_buff[MAX_BUTTON];
 
     dev = open("/dev/fpga_push_switch", O_RDWR);
+    printf("dev : %d\n", dev);
     if (dev<0) {
         printf("Device Open Error\n");
         close(dev);
