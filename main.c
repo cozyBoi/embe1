@@ -162,7 +162,6 @@ int main() {
     struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
     memset(shmaddr_2, 0, sizeof(struct packet));
     while(1){
-        printf("main hi\n");
         //forK?
         
         struct in_packet in_pac;
