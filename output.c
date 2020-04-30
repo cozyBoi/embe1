@@ -189,46 +189,44 @@ void entry_output(){
     struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
     memset(shmaddr_2, 0, sizeof(struct packet));
     while(1){
-        struct packet pak;
-        strcpy(&pak, shmaddr_2);
         int j = 0;
         
-        if(pak.mode == 0){
-            out_to_FND(pak.FND);
-            if(pak.Text_mode == 0){
+        if(shmadder_2->mode == 0){
+            out_to_FND(shmadder_2->FND);
+            if(shmadder_2->Text_mode == 0){
                 out_to_LED(led1);
             }
             else{
-                if(pak.led_mode == 1){
+                if(shmadder_2->led_mode == 1){
                     out_to_LED(led3);
                     if(j == 10){
                         j = 0;
-                        pak.led_mode = 0;
+                        shmadder_2->led_mode = 0;
                     }
                 }
                 else{
                     out_to_LED(led4);
                     if(j == 10){
                         j = 0;
-                        pak.led_mode = 1;
+                        shmadder_2->led_mode = 1;
                     }
                 }
                 j++;
             }
         }
-        else if (pak.mode == 1){
-            out_to_FND(pak.FND);
-            out_to_LCD(pak.TextLED[0], pak.Text_len);
-            out_to_Matrix_alpha(pak.Text_mode);
+        else if (shmadder_2->mode == 1){
+            out_to_FND(shmadder_2->FND);
+            out_to_LCD(shmadder_2->TextLED[0], shmadder_2->Text_len);
+            out_to_Matrix_alpha(shmadder_2->Text_mode);
         }
-        else if (pak.mode == 2){
-            out_to_LCD(pak.TextLED[0], pak.Text_len);
-            out_to_Matrix_alpha(pak.Text_mode);
-            out_to_FND(pak.FND);
+        else if (shmadder_2->mode == 2){
+            out_to_LCD(shmadder_2->TextLED[0], shmadder_2->Text_len);
+            out_to_Matrix_alpha(shmadder_2->Text_mode);
+            out_to_FND(shmadder_2->FND);
         }
-        else if (pak.mode == 3){
+        else if (shmadder_2->mode == 3){
             char tmp_Draw_Matrix[10][7];
-            if(pak.curser == 1){
+            if(shmadder_2->curser == 1){
                 int ii = 0, jj = 0;
                 for(ii = 0 ; ii < 10; ii++){
                     for(jj = 0; jj < 7; jj++){
@@ -247,9 +245,9 @@ void entry_output(){
                 k++;
             }
             else{
-                out_to_Matrix(pak.Draw_Matrix);
+                out_to_Matrix(shmadder_2->Draw_Matrix);
             }
-            out_to_FND(pak.FND);
+            out_to_FND(shmadder_2->FND);
         }
     }
 }

@@ -571,15 +571,13 @@ int main() {
                 pak.Draw_Matrix[i][j] = Draw_Matrix[i][j];
             }
         }
-        pak.mode =mode;
-        pak.led_mode = led_mode;
-        pak.Text_len = Text_len;
-        pak.Text_mode = Text_mode;
-        pak.curser = curser;
-        pak.y = y;
-        pak.x = x;
-        
-        strcpy(shmaddr_2, &pak);
+        shmadder_2->mode =mode;
+        shmadder_2->led_mode = led_mode;
+        shmadder_2->Text_len = Text_len;
+        shmadder_2->Text_mode = Text_mode;
+        shmadder_2->curser = curser;
+        shmadder_2->y = y;
+        shmadder_2->x = x;
     }
     return 0;
 }
