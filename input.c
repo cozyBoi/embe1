@@ -95,7 +95,12 @@ void entry_input(){
         }
         
         read(dev, &push_sw_buff, buff_size);
-        
+        printf("push : ")
+        for(i = 0; i < 9; i++){
+            printf("%d ", push_sw_buff[i]);
+        }
+        printf("\n");
+        usleep(250000);
         shmaddr->type = ev[0].type;
         shmaddr->value = ev[0].value;
         shmaddr->code = ev[0].code;
@@ -110,7 +115,7 @@ void entry_input(){
         printf("from input to main : ");
         printf("type %d value %d code %d\n", in_pac.type,in_pac.value,in_pac.code);
         for(i = 0; i < 9; i++){
-            printf("%d ",in_pac.push_sw_buff[i]);
+            printf("%d ",shmaddr->push_sw_buff[i]);
         }
         usleep(250000);
     }
