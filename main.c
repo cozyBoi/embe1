@@ -555,8 +555,16 @@ int main() {
         
         
         int i, j;
-        for(i = 0; i < 4; i++) shmaddr_2->FND[i] = FND[i];
-        for(i = 0; i < 8; i++) shmaddr_2->LED[i] = LED[i];
+        for(i = 0; i < 4; i++) {
+            shmaddr_2->FND[i] = FND[i];
+            printf("%d ", shmaddr_2->FND[i]);
+        }
+        printf("\n");
+        for(i = 0; i < 8; i++) {
+            shmaddr_2->LED[i] = LED[i];
+            printf("%d ", shmaddr_2->LED[i]);
+        }
+        printf("\n");
         for(i = 0; i < 2; i++){
             for(j = 0; j < 100; j++){
                 shmaddr_2->TextLED[i][j] = TextLED[i][j];
@@ -574,7 +582,16 @@ int main() {
         shmaddr_2->curser = curser;
         shmaddr_2->y = y;
         shmaddr_2->x = x;
+        printf("send main to out\n");
+        printf("%d %d %d %d %d %d %d", shmaddr_2->mode,
+               shmaddr_2->led_mode,
+               shmaddr_2->Text_len,
+               shmaddr_2->Text_mode,
+               shmaddr_2->curser,
+               shmaddr_2->y,
+               shmaddr_2->x);
         //printf("modeeeeee : %d\n", mode);
+        usleep(2000000);
         usleep(500000);
     }
     return 0;
