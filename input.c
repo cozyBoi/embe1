@@ -20,14 +20,6 @@
 #include <linux/input.h>
 
 
-typedef struct in_packet{
-    int type;
-    int value;
-    int code;
-    unsigned char push_sw_buff[9];
-};
-
-
 void entry_input(){
     printf("init input\n");
     struct input_event ev[BUFF_SIZE];
@@ -36,7 +28,7 @@ void entry_input(){
     int dev, buff_size;
     unsigned char push_sw_buff[MAX_BUTTON];
     struct in_packet in_pac;
-    memset(in_pac, 0, sizeof(struct in_packet));
+    memset(&in_pac, 0, sizeof(struct in_packet));
     dev = open("/dev/fpga_push_switch", O_RDWR);
     if (dev<0) {
         printf("Device Open Error\n");
@@ -72,7 +64,7 @@ void entry_input(){
         in_pac.code = ev[0].code;
         strcpy(in_pac.push_sw_buff, push_sw_buff);
         
-        strcpy(shmaddr, in_pac);
+        strcpy(shmaddr, &in_pac);
         usleep(100000);
     }
     close(dev);

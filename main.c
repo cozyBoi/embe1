@@ -18,15 +18,6 @@
 #include <time.h>
 #include <sys/shm.h>
 
-
-typedef struct in_packet{
-    int type;
-    int value;
-    int code;
-    unsigned char push_sw_buff[9];
-};
-
-
 void clock_plus_hour() {
     FND[1]++;
     if (FND[1] == 10) {
