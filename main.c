@@ -148,12 +148,12 @@ int main() {
     int semid, semid0;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
-    usleep(1000000);
-    
     printf("input main\n");
     while(1){
         p(semid0);
         v(semid);
+        printf("main hi\n");
+        usleep(1000000);
         //forK?
         struct input_event*shmaddr_ev;
         unsigned char *shmaddr_sw;

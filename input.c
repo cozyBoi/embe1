@@ -103,9 +103,8 @@ void entry_input(){
         strcpy(in_pac.push_sw_buff, push_sw_buff);
         
         strcpy(shmaddr, &in_pac);
-        usleep(100000);
-        
         vv(semid);
+        usleep(250000);
     }
     close(dev);
 }
