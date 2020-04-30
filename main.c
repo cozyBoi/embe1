@@ -163,6 +163,8 @@ int main() {
     memset(shmaddr_2, 0, sizeof(struct packet));
     while(1){
         //forK?
+        printf("mode : %d\n", mode);
+        usleep(2000000);
         
         struct in_packet in_pac;
         
