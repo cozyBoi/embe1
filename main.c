@@ -120,8 +120,8 @@ int main() {
     curser = 0;
     printf("init2\n");
     usleep(1000000);
+    printf("input main\n");
     while(1){
-        printf("input main\n");
         //forK?
         struct input_event*shmaddr_ev;
         unsigned char *shmaddr_sw;
