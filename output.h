@@ -17,6 +17,9 @@ typedef struct packet{
     int x;
 };
 
+int ppp (int semid);
+
+int vvv(int semid);
 
 void out_to_FND(char data[4]);
 

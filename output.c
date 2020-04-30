@@ -40,6 +40,31 @@ unsigned char fpga_number[11][10] = {
 { 0x1c,0x36,0x63,0x63,0x63,0x7f,0x7f,0x63,0x63,0x63 } // A
 };
 
+int ppp (int semid) {
+    // p 연산
+    struct sembuf p_buf;
+
+    p_buf.sem_num = 0;
+    p_buf.sem_op = -1;
+    p_buf.sem_flg = SEM_UNDO;
+
+    if (semop (semid, &p_buf, 1) == -1) exit (1);
+    return (0);
+}
+int vvv(int semid) {
+
+    // v 연산
+    struct sembuf v_buf;
+
+    v_buf.sem_num = 0;
+    v_buf.sem_op = 1;
+    v_buf.sem_flg = SEM_UNDO;
+
+    if (semop (semid, &v_buf, 1) == -1) exit (1);
+    return (0);
+}
+
+
 void out_to_FND(char data[4]) {
     int dev;
     int i;
@@ -159,7 +184,12 @@ void out_to_Matrix(char matrix[10][7]) {
 void entry_output(){
     printf("init output\n");
     int k = 0;
+    int semid;
+    semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
+    semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
+    
     while(1){
+        vv(semid0);
         key_t key2 = ftok("./", 3);
         int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
         struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
@@ -226,5 +256,6 @@ void entry_output(){
             }
             out_to_FND(pak.FND);
         }
+        pp(semid0);
     }
 }

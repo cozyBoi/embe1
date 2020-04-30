@@ -22,7 +22,6 @@
 #include <sys/ipc.h>
 
 int p (int semid) {
-    printf("sema up\n");
     // p 연산
     struct sembuf p_buf;
 
@@ -34,7 +33,6 @@ int p (int semid) {
     return (0);
 }
 int v(int semid) {
-    printf("sema down\n");
     // v 연산
     struct sembuf v_buf;
 
@@ -153,6 +151,7 @@ int main() {
     
     printf("input main\n");
     while(1){
+        pp(semid0);
         v(semid);
         //forK?
         struct input_event*shmaddr_ev;
@@ -572,6 +571,7 @@ int main() {
         struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
         strcpy(shmaddr_2, &pak);
         p(semid);
+        vv(semid0);
     }
     return 0;
 }

@@ -24,7 +24,6 @@
 
 int pp (int semid) {
     // p 연산
-    printf("sema down\n");
     struct sembuf p_buf;
 
     p_buf.sem_num = 0;
@@ -35,7 +34,7 @@ int pp (int semid) {
     return (0);
 }
 int vv(int semid) {
-    printf("sema up\n");
+
     // v 연산
     struct sembuf v_buf;
 
@@ -72,9 +71,10 @@ void entry_input(){
     
     int semid;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
-    
+    semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
     while (1) {
         pp(semid);
+        
         //printf("input start\n");
         rd = read(fd, ev, size * BUFF_SIZE);
         //printf("input read\n");
@@ -86,7 +86,6 @@ void entry_input(){
                 printf("pop\n");
             }
         }
-        
         
         while (ev[0].type == 1 && ev[0].value == KEY_PRESS && ev[0].code == 114) {
             //volume -, mode change
@@ -106,6 +105,7 @@ void entry_input(){
         
         strcpy(shmaddr, &in_pac);
         usleep(100000);
+        
         vv(semid);
     }
     close(dev);
