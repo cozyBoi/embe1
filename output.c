@@ -191,42 +191,42 @@ void entry_output(){
     while(1){
         int j = 0;
         
-        if(shmadder_2->mode == 0){
-            out_to_FND(shmadder_2->FND);
-            if(shmadder_2->Text_mode == 0){
+        if(shmaddr_2->mode == 0){
+            out_to_FND(shmaddr_2->FND);
+            if(shmaddr_2->Text_mode == 0){
                 out_to_LED(led1);
             }
             else{
-                if(shmadder_2->led_mode == 1){
+                if(shmaddr_2->led_mode == 1){
                     out_to_LED(led3);
                     if(j == 10){
                         j = 0;
-                        shmadder_2->led_mode = 0;
+                        shmaddr_2->led_mode = 0;
                     }
                 }
                 else{
                     out_to_LED(led4);
                     if(j == 10){
                         j = 0;
-                        shmadder_2->led_mode = 1;
+                        shmaddr_2->led_mode = 1;
                     }
                 }
                 j++;
             }
         }
-        else if (shmadder_2->mode == 1){
-            out_to_FND(shmadder_2->FND);
-            out_to_LCD(shmadder_2->TextLED[0], shmadder_2->Text_len);
-            out_to_Matrix_alpha(shmadder_2->Text_mode);
+        else if (shmaddr_2->mode == 1){
+            out_to_FND(shmaddr_2->FND);
+            out_to_LCD(shmaddr_2->TextLED[0], shmaddr_2->Text_len);
+            out_to_Matrix_alpha(shmaddr_2->Text_mode);
         }
-        else if (shmadder_2->mode == 2){
-            out_to_LCD(shmadder_2->TextLED[0], shmadder_2->Text_len);
-            out_to_Matrix_alpha(shmadder_2->Text_mode);
-            out_to_FND(shmadder_2->FND);
+        else if (shmaddr_2->mode == 2){
+            out_to_LCD(shmaddr_2->TextLED[0], shmaddr_2->Text_len);
+            out_to_Matrix_alpha(shmaddr_2->Text_mode);
+            out_to_FND(shmaddr_2->FND);
         }
-        else if (shmadder_2->mode == 3){
+        else if (shmaddr_2->mode == 3){
             char tmp_Draw_Matrix[10][7];
-            if(shmadder_2->curser == 1){
+            if(shmaddr_2->curser == 1){
                 int ii = 0, jj = 0;
                 for(ii = 0 ; ii < 10; ii++){
                     for(jj = 0; jj < 7; jj++){
@@ -245,9 +245,9 @@ void entry_output(){
                 k++;
             }
             else{
-                out_to_Matrix(shmadder_2->Draw_Matrix);
+                out_to_Matrix(shmaddr_2->Draw_Matrix);
             }
-            out_to_FND(shmadder_2->FND);
+            out_to_FND(shmaddr_2->FND);
         }
     }
 }
