@@ -29,4 +29,8 @@ int POW(int n, int p);
 
 void reset_para();
 
+int p (int semid);
+
+int v(int semid);
+
 #endif /* Header_h */

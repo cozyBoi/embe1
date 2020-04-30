@@ -22,7 +22,7 @@
 #include <sys/sem.h>
 #include <sys/ipc.h>
 
-int p (int semid) {
+int pp (int semid) {
     // p 연산
     struct sembuf p_buf;
 
@@ -33,7 +33,7 @@ int p (int semid) {
     if (semop (semid, &p_buf, 1) == -1) exit (1);
     return (0);
 }
-int v(int semid) {
+int vv(int semid) {
     // v 연산
     struct sembuf v_buf;
 
@@ -67,7 +67,7 @@ void entry_input(){
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     
     while (1) {
-        p(semid);
+        pp(semid);
         printf("input start\n");
         rd = read(fd, ev, size * BUFF_SIZE);
         printf("input read\n");
@@ -99,7 +99,7 @@ void entry_input(){
         
         strcpy(shmaddr, &in_pac);
         usleep(100000);
-        v(semid);
+        vv(semid);
     }
     close(dev);
 }
