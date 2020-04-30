@@ -71,7 +71,6 @@ void entry_input(){
     
     int semid;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
-    semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
     while (1) {
         pp(semid);
         
