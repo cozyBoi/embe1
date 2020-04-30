@@ -3,6 +3,7 @@
 #include "input.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
@@ -55,11 +56,7 @@ void entry_input(){
         
         key_t key = ftok("./", 1);
         int shmid = shmget(key, sizeof(in_packet), IPC_CREAT|0644);
-        if(shmid_ev == -1) {
-            perror("shmget");
-            exit(1);
-        }
-       struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
+        struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
         
         in_pac.type = ev[0].type;
         in_pac.value = ev[0].value;
