@@ -102,9 +102,11 @@ int main() {
     int pid = (int)fork();
     if(pid != 0){
         fork();
-        entry_input();
         if(pid != 0){
             entry_output();
+        }
+        else {
+            entry_input();
         }
     }
     dot = 0;
