@@ -73,7 +73,8 @@ void entry_input(){
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     int i;
     while (1) {
-        vv(semid);
+        pp(semid);
+        
         printf("input hi\n");
         usleep(1000000);
         //printf("input start\n");
@@ -111,7 +112,7 @@ void entry_input(){
             printf("%d ",in_pac.push_sw_buff[i]);
         }
         usleep(2000000);
-        pp(semid);
+        vv(semid);
         usleep(250000);
     }
     close(dev);
