@@ -242,7 +242,7 @@ void reset_para() {
     }
     out_to_Matrix(Draw_Matrix);
     out_to_FND(FND);
-    out_to_LCD(TextLED[0]);
+    out_to_LCD(TextLED[0], 8);
     out_to_LED(LED);
     Count_total = dot = 0;
     Count_jinsu = 10;
