@@ -19,6 +19,15 @@
 #include <sys/shm.h>
 #include <linux/input.h>
 
+
+typedef struct in_packet{
+    int type;
+    int value;
+    int code;
+    unsigned char push_sw_buff[9];
+};
+
+
 void entry_input(){
     printf("init input\n");
     struct input_event ev[BUFF_SIZE];
