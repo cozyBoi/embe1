@@ -12,19 +12,19 @@ _OBJS = input.o output.o main.o
 OBJS = $(addprefix $(OBJDIR),$(_OBJS))
 
 $(OBJDIR)$(TARGET): $(OBJS)
-   $(CC) -static -o $(OBJDIR)$(TARGET) $(OBJS)
+	$(CC) -static -o $(OBJDIR)$(TARGET) $(OBJS)
 
 $(OBJDIR)%.o: %.c $(OBJDIR)
-   $(CC) -static -c -o $@ $<
+	$(CC) -static -c -o $@ $<
 
 $(OBJDIR):
-   mkdir -p $(OBJDIR)
+	mkdir -p $(OBJDIR)
 
 .PHONY: clean
 clean:
-   rm -rf $(OBJDIR)
+	rm -rf $(OBJDIR)
 
 .PHONY: push
 push:
-   make
-   adb push $(OBJDIR)$(TARGET) /data/local/tmp
+	make
+	adb push $(OBJDIR)$(TARGET) /data/local/tmp
