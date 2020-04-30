@@ -16,8 +16,8 @@ unsigned char quit = 0;
 
 
 char FND[4], LED[8], TextLED[2][100], Draw_Matrix[10][7];
-int dot = 0, Count_jinsu = 10, Count_total = 0, Text_len = 1, Text_mode = TEXT_ALPHA_MODE, i, firstExec = 1, led_mode = 0, mode = 0;
-int y, x, curser = 0, firstExec;
+int dot, Count_jinsu, Count_total, Text_len, Text_mode = TEXT_ALPHA_MODE, i, firstExec, led_mode, mode;
+int y, x, curser, firstExec;
 
 unsigned char fpga_number[11][10] = {
 	{ 0x3e,0x7f,0x63,0x73,0x73,0x6f,0x67,0x63,0x7f,0x3e }, // 0

@@ -106,7 +106,15 @@ int main() {
             entry_output();
         }
     }
-    
+    dot = 0;
+    Count_jinsu = 10;
+    Count_total = 0;
+    Text_len = 1;
+    Text_mode = TEXT_ALPHA_MODE;
+    firstExec = 1;
+    led_mode = 0;
+    mode = 0;
+    curser = 0;
     while(1){
         //forK?
 
