@@ -143,7 +143,7 @@ void entry_output(){
     while(1){
         key_t key2 = ftok("./", 3);
         int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
-        shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
+        struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
         struct packet pak;
         strcpy(&pak, shmaddr_2);
         int j = 0;
