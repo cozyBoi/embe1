@@ -189,7 +189,7 @@ void entry_output(){
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
     
     while(1){
-        vv(semid0);
+        vvv(semid0);
         key_t key2 = ftok("./", 3);
         int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
         struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
@@ -256,6 +256,6 @@ void entry_output(){
             }
             out_to_FND(pak.FND);
         }
-        pp(semid0);
+        ppp(semid0);
     }
 }

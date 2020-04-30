@@ -151,7 +151,7 @@ int main() {
     
     printf("input main\n");
     while(1){
-        pp(semid0);
+        p(semid0);
         v(semid);
         //forK?
         struct input_event*shmaddr_ev;
@@ -571,7 +571,7 @@ int main() {
         struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
         strcpy(shmaddr_2, &pak);
         p(semid);
-        vv(semid0);
+        v(semid0);
     }
     return 0;
 }
