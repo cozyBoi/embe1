@@ -235,10 +235,10 @@ void entry_output(){
                 }
                 
                 if(k <= 10){
-                    tmp_Draw_Matrix[pak.y][pak.x] = 1;
+                    tmp_Draw_Matrix[shmaddr_2->y][shmaddr_2->x] = 1;
                 }
                 else{
-                    tmp_Draw_Matrix[pak.y][pak.x] = 0;
+                    tmp_Draw_Matrix[shmaddr_2->y][shmaddr_2->x] = 0;
                     if(k > 20) k = 0;
                 }
                 out_to_Matrix(tmp_Draw_Matrix);
