@@ -125,6 +125,8 @@ int main() {
         struct input_event*shmaddr_ev;
         unsigned char *shmaddr_sw;
         
+        struct in_packet in_pac;
+        
         key_t key0 = ftok("./", 1);
         
         int shmid = shmget(key0, sizeof(struct in_packet), IPC_CREAT|0644);
