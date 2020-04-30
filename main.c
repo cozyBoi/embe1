@@ -202,6 +202,10 @@ int main() {
                 printf("mode : %d\n", mode);
             }
 		}
+        if ( ev[0].code == 158) {
+            
+            break;
+        }
         //printf("before read\n");
         
         
