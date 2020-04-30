@@ -56,7 +56,7 @@ void entry_input(){
         read(dev, &push_sw_buff, buff_size);
         
         key_t key = ftok("./", 1);
-        int shmid = shmget(key, sizeof in_packet, IPC_CREAT|0644);
+        int shmid = shmget(key, sizeof(struct in_packet), IPC_CREAT|0644);
         struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
         
         in_pac.type = ev[0].type;
