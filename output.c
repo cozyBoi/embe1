@@ -187,7 +187,7 @@ void entry_output(){
     int semid, semid0;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
-    
+    usleep(1000000);
     while(1){
         vvv(semid0);
         printf("output hi\n");
