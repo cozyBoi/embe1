@@ -202,7 +202,9 @@ int main() {
                 printf("mode : %d\n", mode);
             }
 		}
-        if ( ev[0].code == 158) {
+        printf("%d %d %d\n", ev[0].type, ev[0].value, ev[0].code);
+        usleep(100000);
+        if (ev[0].code == 158) {
             
             break;
         }
