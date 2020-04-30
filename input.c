@@ -92,13 +92,14 @@ void entry_input(){
         while (ev[0].type == 1 && ev[0].value == KEY_PRESS && ev[0].code == 114) {
             //volume -, mode change
             rd = read(fd, ev, size * BUFF_SIZE);
+            
         }
         
         shmaddr->type = ev[0].type;
         shmaddr->value = ev[0].value;
         shmaddr->code = ev[0].code;
         strcpy(shmaddr->push_sw_buff, push_sw_buff);
-
+        ev[0].type = 0;
 //        in_pac.type = ev[0].type;
 //        in_pac.value = ev[0].value;
 //        in_pac.code = ev[0].code;
