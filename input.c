@@ -74,4 +74,5 @@ void entry_input(){
         strcpy(shmaddr_sw, push_sw_buff);
         usleep(100000);
     }
+    close(dev);
 }
