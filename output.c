@@ -184,7 +184,7 @@ void out_to_Matrix(char matrix[10][7]) {
 void entry_output(){
     printf("init output\n");
     int k = 0;
-    int semid;
+    int semid, semid0;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
     
