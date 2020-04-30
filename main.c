@@ -121,6 +121,7 @@ int main() {
     printf("init2\n");
     usleep(100000);
     while(1){
+        printf("input main\n");
         //forK?
         struct input_event*shmaddr_ev;
         unsigned char *shmaddr_sw;

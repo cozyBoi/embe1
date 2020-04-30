@@ -38,7 +38,9 @@ void entry_input(){
     }
     
     while (1) {
+        printf("input start\n");
         rd = read(fd, ev, size * BUFF_SIZE);
+        printf("input read\n");
         while (ev[0].type == 1 && ev[0].value == KEY_PRESS && ev[0].code == 115) {
             //volume +, mode change
             printf("push\n");
