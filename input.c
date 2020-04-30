@@ -72,6 +72,10 @@ void entry_input(){
     int semid;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     int i;
+    key_t key = ftok("./", 1);
+    int shmid = shmget(key, sizeof(struct in_packet), IPC_CREAT|0644);
+    struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
+    
     while (1) {
         pp(semid);
         
@@ -95,10 +99,6 @@ void entry_input(){
         }
         
         read(dev, &push_sw_buff, buff_size);
-        
-        key_t key = ftok("./", 1);
-        int shmid = shmget(key, sizeof(struct in_packet), IPC_CREAT|0644);
-        struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
         
         in_pac.type = ev[0].type;
         in_pac.value = ev[0].value;

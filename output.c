@@ -187,17 +187,16 @@ void entry_output(){
     int semid, semid0;
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
+    int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
+    struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
     while(1){
         vvv(semid0);
         printf("output hi\n");
         usleep(1000000);
         key_t key2 = ftok("./", 3);
-        int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
-        struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
         struct packet pak;
         strcpy(&pak, shmaddr_2);
         int j = 0;
-        
         
         if(pak.mode == 0){
             out_to_FND(pak.FND);

@@ -149,23 +149,23 @@ int main() {
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
     printf("input main\n");
+    
+    key_t key0 = ftok("./", 1);
+    struct input_event*shmaddr_ev;
+    unsigned char *shmaddr_sw;
+    int shmid = shmget(key0, sizeof(struct in_packet), IPC_CREAT|0644);
+    struct in_packet*shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
+    
     while(1){
         p(semid0);
         v(semid);
         
-        
         printf("main hi\n");
         usleep(1000000);
         //forK?
-        struct input_event*shmaddr_ev;
-        unsigned char *shmaddr_sw;
         
         struct in_packet in_pac;
         
-        key_t key0 = ftok("./", 1);
-        
-        int shmid = shmget(key0, sizeof(struct in_packet), IPC_CREAT|0644);
-        struct in_packet*shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
         strcpy(&in_pac,shmaddr);
         
         ev[0].type = in_pac.type;
