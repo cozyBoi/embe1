@@ -73,7 +73,7 @@ void entry_input(){
     key_t key = ftok("./", 1);
     int shmid = shmget(key, sizeof(struct in_packet), IPC_CREAT|0644);
     struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
-    memset(shmaddr, 0, sizeof(struct packet);
+    memset(shmaddr, 0, sizeof(struct packet));
     while (1) {
         printf("input hi\n");
         usleep(1000000);
