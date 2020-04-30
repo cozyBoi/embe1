@@ -68,7 +68,7 @@ void entry_input(){
         close(dev);
         return -1;
     }
-    
+    buff_size = sizeof(push_sw_buff);
     int i;
     key_t key = ftok("./", 1);
     int shmid = shmget(key, sizeof(struct in_packet), IPC_CREAT|0644);
@@ -97,7 +97,7 @@ void entry_input(){
         }
         
         
-        printf("push : %d", rrdd);
+        printf("push : %d\n", rrdd);
         for(i = 0; i < 9; i++){
             printf("%d ", push_sw_buff[i]);
         }
