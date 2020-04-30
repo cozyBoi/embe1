@@ -574,8 +574,8 @@ int main() {
         shmaddr_2->curser = curser;
         shmaddr_2->y = y;
         shmaddr_2->x = x;
-        printf("mode : %d\n", mode);
-        usleep(250000);
+        printf("modeeeeee : %d\n", mode);
+        usleep(1000000);
     }
     return 0;
 }
