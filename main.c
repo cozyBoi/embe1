@@ -125,6 +125,10 @@ void reset_para() {
     y = x = 0;
     curser = 0;
     firstExec = 1;
+    out_to_FND(FND);
+    out_to_LCD(TextLED[0], 8);
+    out_to_LED(LED);
+    out_to_Matrix(Draw_Matrix);
 }
 
 int main() {
@@ -159,7 +163,31 @@ int main() {
 	(void)signal(SIGINT, user_signal1);
 	buff_size = sizeof(push_sw_buff);
 	//dev open
-	
+	int pid = (int)fork();
+    if(pid != 0){
+        int ppid = fork();
+        if(ppid != 0){
+            entry_output();
+        }
+        else {
+            entry_input();
+        }
+    }
+    int semid, semid0;
+    semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
+    semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
+    key_t key0 = ftok("./", 1);
+    struct input_event*shmaddr_ev;
+    unsigned char *shmaddr_sw;
+    int shmid = shmget(key0, sizeof(struct in_packet), IPC_CREAT|0644);
+    struct in_packet*shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
+    memset(shmaddr, 0, sizeof(struct packet));
+    
+    key_t key2 = ftok("./", 3);
+    int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
+    struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
+    memset(shmaddr_2, 0, sizeof(struct packet));
+    
 	while (!quit) {
 		rd = read(fd, ev, size * BUFF_SIZE);
 		//event0 read
