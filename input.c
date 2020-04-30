@@ -75,8 +75,6 @@ void entry_input(){
     struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
     memset(shmaddr, 0, sizeof(struct packet));
     while (1) {
-        printf("input hi\n");
-        usleep(1000000);
         //printf("input start\n");
         int rrdd = 0;
         rd = read(fd, ev, size * BUFF_SIZE);
@@ -96,13 +94,6 @@ void entry_input(){
             rd = read(fd, ev, size * BUFF_SIZE);
         }
         
-        
-        printf("push : %d\n", rrdd);
-        for(i = 0; i < 9; i++){
-            printf("%d ", push_sw_buff[i]);
-        }
-        printf("\n");
-        usleep(250000);
         shmaddr->type = ev[0].type;
         shmaddr->value = ev[0].value;
         shmaddr->code = ev[0].code;
@@ -114,11 +105,6 @@ void entry_input(){
 //        strcpy(in_pac.push_sw_buff, push_sw_buff);
         
         //strcpy(shmaddr, &in_pac);
-        printf("from input to main : ");
-        printf("type %d value %d code %d\n", in_pac.type,in_pac.value,in_pac.code);
-        for(i = 0; i < 9; i++){
-            printf("%d ",shmaddr->push_sw_buff[i]);
-        }
         usleep(250000);
     }
     close(dev);

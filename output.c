@@ -190,8 +190,7 @@ void entry_output(){
     memset(shmaddr_2, 0, sizeof(struct packet));
     while(1){
         int j = 0;
-        printf("output mode : %d\n", shmaddr_2->mode);
-        usleep(2000000);
+
         if(shmaddr_2->mode == 0){
             out_to_FND(shmaddr_2->FND);
             if(shmaddr_2->Text_mode == 0){
