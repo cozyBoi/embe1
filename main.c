@@ -149,10 +149,11 @@ int main() {
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
     printf("input main\n");
-    usleep(2000000);
     while(1){
-        p(semid0);
-        v(semid);
+        v(semid0);
+        p(semid);
+        
+        
         printf("main hi\n");
         usleep(1000000);
         //forK?
@@ -572,8 +573,8 @@ int main() {
         int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
         struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
         strcpy(shmaddr_2, &pak);
-        p(semid);
-        v(semid0);
+        v(semid);
+        p(semid0);
     }
     return 0;
 }
