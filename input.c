@@ -54,6 +54,12 @@ void entry_input(){
     int dev, buff_size;
     unsigned char push_sw_buff[MAX_BUTTON];
     struct in_packet in_pac;
+    
+    if ((fd = open(device, O_RDONLY | O_NONBLOCK)) == -1) {
+        printf("%s is not a vaild device.n", device);
+    }
+
+    
     memset(&in_pac, 0, sizeof(struct in_packet));
     dev = open("/dev/fpga_push_switch", O_RDWR);
     printf("dev : %d\n", dev);
