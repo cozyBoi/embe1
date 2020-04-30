@@ -159,8 +159,8 @@ int main() {
     
     key_t key2 = ftok("./", 3);
     int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
-    struct packet*shmadder_2 = (struct packet*)shmat(shmid_2, NULL, 0);
-    memset(shmadder_2, 0, sizeof(struct packet));
+    struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
+    memset(shmaddr_2, 0, sizeof(struct packet));
     while(1){
         printf("main hi\n");
         usleep(1000000);
@@ -571,13 +571,13 @@ int main() {
                 pak.Draw_Matrix[i][j] = Draw_Matrix[i][j];
             }
         }
-        shmadder_2->mode =mode;
-        shmadder_2->led_mode = led_mode;
-        shmadder_2->Text_len = Text_len;
-        shmadder_2->Text_mode = Text_mode;
-        shmadder_2->curser = curser;
-        shmadder_2->y = y;
-        shmadder_2->x = x;
+        shmaddr_2->mode =mode;
+        shmaddr_2->led_mode = led_mode;
+        shmaddr_2->Text_len = Text_len;
+        shmaddr_2->Text_mode = Text_mode;
+        shmaddr_2->curser = curser;
+        shmaddr_2->y = y;
+        shmaddr_2->x = x;
     }
     return 0;
 }
