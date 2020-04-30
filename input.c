@@ -73,7 +73,8 @@ void entry_input(){
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     while (1) {
         pp(semid);
-        
+        printf("input hi\n");
+        usleep(1000000);
         //printf("input start\n");
         rd = read(fd, ev, size * BUFF_SIZE);
         //printf("input read\n");

@@ -190,7 +190,8 @@ void entry_output(){
     
     while(1){
         vvv(semid0);
-        
+        printf("output hi\n");
+        usleep(1000000);
         key_t key2 = ftok("./", 3);
         int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
         struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
