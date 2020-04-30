@@ -17,6 +17,9 @@
 #include <sys/ioctl.h>
 #include <time.h>
 #include <sys/shm.h>
+#include <sys/types.h>
+#include <sys/sem.h>
+#include <sys/ipc.h>
 
 
 char led1[8] = { 1, 0 ,0, 0, 0, 0 ,0 ,0 };

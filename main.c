@@ -17,6 +17,32 @@
 #include <sys/ioctl.h>
 #include <time.h>
 #include <sys/shm.h>
+#include <sys/sem.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+
+int p (int semid) {
+    // p 연산
+    struct sembuf p_buf;
+
+    p_buf.sem_num = 0;
+    p_buf.sem_op = -1;
+    p_buf.sem_flg = SEM_UNDO;
+
+    if (semop (semid, &p_buf, 1) == -1) exit (1);
+    return (0);
+}
+int v(int semid) {
+    // v 연산
+    struct sembuf v_buf;
+
+    v_buf.sem_num = 0;
+    v_buf.sem_op = 1;
+    v_buf.sem_flg = SEM_UNDO;
+
+    if (semop (semid, &v_buf, 1) == -1) exit (1);
+    return (0);
+}
 
 void clock_plus_hour() {
     FND[1]++;
@@ -119,9 +145,13 @@ int main() {
     mode = 0;
     curser = 0;
     printf("init2\n");
+    int semid;
+    semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     usleep(1000000);
+    
     printf("input main\n");
     while(1){
+        v(semid);
         //forK?
         struct input_event*shmaddr_ev;
         unsigned char *shmaddr_sw;
@@ -539,6 +569,7 @@ int main() {
         int shmid_2 = shmget(key2, sizeof(struct packet), IPC_CREAT|0644);
         struct packet*shmaddr_2 = (struct packet*)shmat(shmid_2, NULL, 0);
         strcpy(shmaddr_2, &pak);
+        p(semid);
     }
     return 0;
 }

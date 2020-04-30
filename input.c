@@ -18,6 +18,32 @@
 #include <time.h>
 #include <sys/shm.h>
 #include <linux/input.h>
+#include <sys/types.h>
+#include <sys/sem.h>
+#include <sys/ipc.h>
+
+int p (int semid) {
+    // p 연산
+    struct sembuf p_buf;
+
+    p_buf.sem_num = 0;
+    p_buf.sem_op = -1;
+    p_buf.sem_flg = SEM_UNDO;
+
+    if (semop (semid, &p_buf, 1) == -1) exit (1);
+    return (0);
+}
+int v(int semid) {
+    // v 연산
+    struct sembuf v_buf;
+
+    v_buf.sem_num = 0;
+    v_buf.sem_op = 1;
+    v_buf.sem_flg = SEM_UNDO;
+
+    if (semop (semid, &v_buf, 1) == -1) exit (1);
+    return (0);
+}
 
 
 void entry_input(){
@@ -37,7 +63,11 @@ void entry_input(){
         return -1;
     }
     
+    int semid;
+    semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
+    
     while (1) {
+        p(semid);
         printf("input start\n");
         rd = read(fd, ev, size * BUFF_SIZE);
         printf("input read\n");
@@ -69,6 +99,7 @@ void entry_input(){
         
         strcpy(shmaddr, &in_pac);
         usleep(100000);
+        v(semid);
     }
     close(dev);
 }
