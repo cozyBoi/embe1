@@ -119,7 +119,7 @@ int main() {
     mode = 0;
     curser = 0;
     printf("init2\n");
-    usleep(100000);
+    usleep(1000000);
     while(1){
         printf("input main\n");
         //forK?
