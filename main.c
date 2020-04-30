@@ -639,6 +639,26 @@ int main() {
             
             j++;
         }
+        
+        if(mode == 1){
+            
+            if(Count_jinsu == 10){
+                char leddd[8] = {1, 0 ,0, 0, 0, 0 ,0 ,0 };
+                out_to_LED(leddd);
+            }
+            if(Count_jinsu == 8){
+                char leddd[8] = {0, 1 ,0, 0, 0, 0 ,0 ,0 };
+                out_to_LED(leddd);
+            }
+            if(Count_jinsu == 4){
+                char leddd[8] = {0, 0 ,1, 0, 0, 0 ,0 ,0 };
+                out_to_LED(leddd);
+            }
+            if(Count_jinsu == 2){
+                char leddd[8] = {0, 0 ,0,1 , 0, 0 ,0 ,0 };
+                out_to_LED(leddd);
+            }
+        }
 	}
 
 	return 0;
