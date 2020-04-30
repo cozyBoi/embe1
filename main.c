@@ -119,22 +119,22 @@ int main() {
     mode = 0;
     curser = 0;
     printf("init2\n");
+    usleep(100000);
     while(1){
         //forK?
         struct input_event*shmaddr_ev;
         unsigned char *shmaddr_sw;
         
         key_t key0 = ftok("./", 1);
-        key_t key1 = ftok("./", 2);
         
-        int shmid_ev = shmget(key0, 1024, IPC_CREAT|0644);
-        int shmid_sw = shmget(key1, 1024, IPC_CREAT|0644);
+        int shmid = shmget(key0, sizeof(in_packet), IPC_CREAT|0644);
+        struct in_packet*shmaddr = (struct in_packet)shmat(shmid, NULL, 0);
+        strcpy(in_pac,shmaddr);
         
-        shmaddr_ev = (struct input_event**)shmat(shmid_ev, NULL, 0);
-        strcpy(&ev, shmaddr_ev);
-        
-        shmaddr_sw = (unsigned char *)shmat(shmid_sw, NULL, 0);
-        strcpy(push_sw_buff, shmaddr_sw);
+        ev[0].type = in_pac.type;
+        ev[0].value = in_pac.value;
+        ev[0].code = in_pac.code;
+        strcpy(push_sw_buff, in_pac.push_sw_buff);
         
         if (ev[0].type == 1 && ev[0].value == KEY_RELEASE && ev[0].code == 115) {
             mode = (mode + 1) % 4;

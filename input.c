@@ -7,7 +7,6 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <dirent.h>
-#include <linux/input.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/select.h>
@@ -17,6 +16,7 @@
 #include <sys/ioctl.h>
 #include <time.h>
 #include <sys/shm.h>
+#include <linux/input.h>
 
 void entry_input(){
     printf("init input\n");
@@ -25,7 +25,8 @@ void entry_input(){
     char* device = "/dev/input/event0";
     int dev, buff_size;
     unsigned char push_sw_buff[MAX_BUTTON];
-
+    struct in_packet in_pac;
+    memset(in_pac, 0, sizeof(struct in_packet));
     dev = open("/dev/fpga_push_switch", O_RDWR);
     if (dev<0) {
         printf("Device Open Error\n");
@@ -35,8 +36,6 @@ void entry_input(){
     
     while (1) {
         rd = read(fd, ev, size * BUFF_SIZE);
-        
-        
         while (ev[0].type == 1 && ev[0].value == KEY_PRESS && ev[0].code == 115) {
             //volume +, mode change
             printf("push\n");
@@ -54,29 +53,20 @@ void entry_input(){
         
         read(dev, &push_sw_buff, buff_size);
         
-        usleep(100000);
-        
         key_t key = ftok("./", 1);
-        int shmid_ev = shmget(key, 1024, IPC_CREAT|0644);
-        struct input_event*shmaddr_ev;
+        int shmid = shmget(key, sizeof(in_packet), IPC_CREAT|0644);
         if(shmid_ev == -1) {
             perror("shmget");
             exit(1);
         }
+       struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
         
-        shmaddr_ev = (struct input_event* *)shmat(shmid_ev, NULL, 0);
-        strcpy(shmaddr_ev, ev);
+        in_pac.type = ev[0].type;
+        in_pac.value = ev[0].value;
+        in_pac.code = ev[0].code;
+        strcpy(in_pac.push_sw_buff, push_sw_buff);
         
-        key = ftok("./", 2);
-        int shmid_sw = shmget(key, 1024, IPC_CREAT|0644);
-        unsigned char *shmaddr_sw;
-        if(shmid_sw == -1) {
-            perror("shmget");
-            exit(1);
-        }
-        
-        shmaddr_sw = (unsigned char *)shmat(shmid_sw, NULL, 0);
-        strcpy(shmaddr_sw, push_sw_buff);
+        strcpy(shmaddr, in_pac);
         usleep(100000);
     }
     close(dev);
