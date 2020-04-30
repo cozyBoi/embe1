@@ -172,7 +172,7 @@ int main() {
         strcpy(push_sw_buff, shmaddr->push_sw_buff);
         
         memset(shmaddr, 0, sizeof(struct packet));
-        memset(shmaddr_2, 0, sizeof(struct packet));
+        
         
         if (ev[0].type == 1 && ev[0].value == KEY_RELEASE && ev[0].code == 115) {
             ev[0].type = 0;
