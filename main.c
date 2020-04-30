@@ -149,7 +149,7 @@ int main() {
     semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     semid0 = semget ((key_t)12346, 1, 0666 | IPC_CREAT);
     printf("input main\n");
-    usleep(1000000);
+    usleep(2000000);
     while(1){
         p(semid0);
         v(semid);
