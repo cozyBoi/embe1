@@ -78,7 +78,9 @@ void entry_input(){
         printf("input hi\n");
         usleep(1000000);
         //printf("input start\n");
+        int rrdd = 0;
         rd = read(fd, ev, size * BUFF_SIZE);
+        rrdd = read(dev, &push_sw_buff, buff_size);
         //printf("input read\n");
         while (ev[0].type == 1 && ev[0].value == KEY_PRESS && ev[0].code == 115) {
             //volume +, mode change
@@ -94,8 +96,8 @@ void entry_input(){
             rd = read(fd, ev, size * BUFF_SIZE);
         }
         
-        read(dev, &push_sw_buff, buff_size);
-        printf("push : ");
+        
+        printf("push : %d", rrdd);
         for(i = 0; i < 9; i++){
             printf("%d ", push_sw_buff[i]);
         }
