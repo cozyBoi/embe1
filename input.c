@@ -69,16 +69,12 @@ void entry_input(){
         return -1;
     }
     
-    int semid;
-    semid = semget ((key_t)12345, 1, 0666 | IPC_CREAT);
     int i;
     key_t key = ftok("./", 1);
     int shmid = shmget(key, sizeof(struct in_packet), IPC_CREAT|0644);
     struct in_packet* shmaddr = (struct in_packet*)shmat(shmid, NULL, 0);
-    
+    memset(shmaddr, 0, sizeof(struct packet);
     while (1) {
-        pp(semid);
-        
         printf("input hi\n");
         usleep(1000000);
         //printf("input start\n");
@@ -111,8 +107,6 @@ void entry_input(){
         for(i = 0; i < 9; i++){
             printf("%d ",in_pac.push_sw_buff[i]);
         }
-        usleep(2000000);
-        vv(semid);
         usleep(250000);
     }
     close(dev);
