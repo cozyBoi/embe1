@@ -222,7 +222,7 @@ void entry_output(){
         else if (shmaddr_2->mode == 2){
             out_to_LCD(shmaddr_2->TextLED[0], shmaddr_2->Text_len);
             out_to_Matrix_alpha(shmaddr_2->Text_mode);
-            out_to_FND(shmaddr_2->FND);
+            //out_to_FND(shmaddr_2->FND);
         }
         else if (shmaddr_2->mode == 3){
             char tmp_Draw_Matrix[10][7];
